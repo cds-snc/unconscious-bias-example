@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Box, Button, Grommet, Heading, Text } from "grommet";
 import { Trans } from "@lingui/macro";
 import { I18nProvider, I18n } from "@lingui/react";
+import AppBar from "./AppBar";
+import Visualization from "./Visualization";
 import catalogEn from "./locales/en/messages.js";
 import catalogFr from "./locales/fr/messages.js";
 
@@ -18,20 +20,6 @@ const theme = {
     }
   }
 };
-
-const AppBar = props => (
-  <Box
-    tag="header"
-    direction="row"
-    align="center"
-    justify="between"
-    background="brand"
-    pad={{ left: "medium", right: "medium", vertical: "small" }}
-    elevation="medium"
-    style={{ zIndex: "1" }}
-    {...props}
-  />
-);
 
 const App = () => {
   const [lang, setLang] = useState("en");
@@ -64,24 +52,7 @@ const App = () => {
                 </Box>
               </AppBar>
 
-              <Box
-                justify="center"
-                align="center"
-                direction="column"
-                flex
-                overflow={{ horizontal: "hidden" }}
-              >
-                <Box
-                  flex
-                  align="center"
-                  justify="center"
-                  pad={{ horizontal: "5%", top: "5%", bottom: "2%" }}
-                >
-                  Controls
-                </Box>
-
-                <Box>Body</Box>
-              </Box>
+              <Visualization />
             </Box>
           </Grommet>
         )}
