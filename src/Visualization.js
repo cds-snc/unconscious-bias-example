@@ -1,8 +1,8 @@
 import React from "react";
-import { Box, Distribution, Text } from "grommet";
+import { Box, Text } from "grommet";
 
 const Visualization = () => {
-  const ratioArray = [[70, 30], [90, 10], [50, 50]];
+  const ratioArray = [[30, 70], [40, 60], [50, 50]];
 
   return (
     <Box
@@ -21,25 +21,30 @@ const Visualization = () => {
         Controls
       </Box>
 
-      <Box width="50%">
-        {ratioArray.map(ratios => (
+      <Box width="70%">
+        {ratioArray.map((ratios, index) => (
           <Box
+            direction="row"
+            flex
             margin={{
-              vertical: "10px"
+              vertical: "5px"
             }}
           >
-            <Distribution
-              values={[
-                { value: ratios[0], color: "light-3" },
-                { value: ratios[1], color: "brand" }
-              ]}
-            >
-              {value => (
-                <Box pad="small" background={value.color} fill>
-                  <Text size="large">{value.value}</Text>
-                </Box>
-              )}
-            </Distribution>
+            <Text width="100px" margin={{ right: "5px" }}>
+              Level {ratios.length - index + 1}
+            </Text>
+            <Box direction="row" flex>
+              <Box width={`${ratios[0]}%`} background="light-3">
+                <Text margin={{ left: "5px" }} size="large">
+                  {ratios[0]}
+                </Text>
+              </Box>
+              <Box width={`${ratios[1]}%`} background="brand" align="end">
+                <Text margin={{ right: "5px" }} size="large">
+                  {ratios[1]}
+                </Text>
+              </Box>
+            </Box>
           </Box>
         ))}
       </Box>
