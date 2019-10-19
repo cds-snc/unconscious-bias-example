@@ -26,11 +26,28 @@ const App = () => {
   const [ratioArray, setRatioArray] = useState([[50, 50], [40, 60]]);
   const [numLevels, setNumLevels] = useState(5);
   const [bias, setBias] = useState(1);
+  const [time, setTime] = useState(0);
+  const [attrition, setAttrition] = useState(15);
+  const [employees, setEmployees] = useState([]);
 
   const reset = () => {
-    console.log({ numLevels });
-    setRatioArray([...Array(numLevels).keys()].map(_ => [50, 50]));
+    const newEmployees = [];
+    for (let level = 0; level < numLevels; level++) {
+      newEmployees.concat(
+        [...Array(100).keys()].map(_ => getRandomEmployee(undefined, bias))
+      );
+    }
+    setEmployees(newEmployees);
+    setRatioArray();
   };
+
+  const stepSimulation = () => {
+    setTime(time + 1);
+  };
+
+  const startSimulation = () => {};
+
+  const pauseSimulation = () => {};
 
   return (
     <I18nProvider language={lang} catalogs={{ en: catalogEn, fr: catalogFr }}>
@@ -56,6 +73,8 @@ const App = () => {
                 setNumLevels={setNumLevels}
                 bias={bias}
                 setBias={setBias}
+                startSimulation={startSimulation}
+                pauseSimulation={pauseSimulation}
               />
             </Box>
             <Visualization ratioArray={ratioArray} />
