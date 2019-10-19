@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { Box, Grommet } from "grommet";
+import { Box, Grommet, Text } from "grommet";
 import { I18nProvider } from "@lingui/react";
 import AppBar from "./AppBar";
 import Controls from "./Controls";
 import Visualization from "./Visualization";
+import {
+  countGenders,
+  fillRandomly,
+  stepAllLevels
+} from "./utils/employeeUtils";
+import { copy } from "./utils/miscUtils";
 import catalogEn from "./locales/en/messages.js";
 import catalogFr from "./locales/fr/messages.js";
 
@@ -23,31 +29,34 @@ const theme = {
 
 const App = () => {
   const [lang, setLang] = useState("en");
-  const [ratioArray, setRatioArray] = useState([[50, 50], [40, 60]]);
-  const [numLevels, setNumLevels] = useState(5);
+  const [numLevels, setNumLevels] = useState(3);
+  const [employeesPerLevel, setEmployeesPerLevel] = useState([100, 30, 10]);
+  const [levels, setLevels] = useState([]);
   const [bias, setBias] = useState(1);
+  const [attritionRate, setAttritionRate] = useState(10);
   const [time, setTime] = useState(0);
-  const [attrition, setAttrition] = useState(15);
-  const [employees, setEmployees] = useState([]);
 
   const reset = () => {
-    const newEmployees = [];
-    for (let level = 0; level < numLevels; level++) {
-      newEmployees.concat(
-        [...Array(100).keys()].map(_ => getRandomEmployee(undefined, bias))
+    let newLevels = [];
+    for (let levelIndex = 0; levelIndex < numLevels; levelIndex++) {
+      let newLevel = [...Array(employeesPerLevel[levelIndex]).keys()].map(
+        _ => ({
+          boxStatus: "vacant"
+        })
       );
+      newLevel = fillRandomly(newLevel, bias);
+      newLevels.push(copy(newLevel));
     }
-    setEmployees(newEmployees);
-    setRatioArray();
+    console.log(newLevels);
+    setLevels(newLevels);
   };
 
   const stepSimulation = () => {
     setTime(time + 1);
+    setLevels(stepAllLevels(levels, attritionRate, bias));
   };
 
-  const startSimulation = () => {};
-
-  const pauseSimulation = () => {};
+  const countArray = levels.map(level => countGenders(level));
 
   return (
     <I18nProvider language={lang} catalogs={{ en: catalogEn, fr: catalogFr }}>
@@ -73,11 +82,11 @@ const App = () => {
                 setNumLevels={setNumLevels}
                 bias={bias}
                 setBias={setBias}
-                startSimulation={startSimulation}
-                pauseSimulation={pauseSimulation}
+                stepSimulation={stepSimulation}
               />
             </Box>
-            <Visualization ratioArray={ratioArray} />
+            <Text>Time: {time}</Text>
+            <Visualization countArray={countArray} />
           </Box>
         </Box>
       </Grommet>

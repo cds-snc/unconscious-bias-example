@@ -9,8 +9,7 @@ const Controls = props => {
     setNumLevels,
     bias,
     setBias,
-    startSimulation,
-    pauseSimulation
+    stepSimulation
   } = props;
 
   return (
@@ -39,8 +38,7 @@ const Controls = props => {
 
       <Box direction="row" gap="medium" margin={{ vertical: "medium" }}>
         <Button label="Reset" onClick={doReset} />
-        <Button label="Go" onClick={startSimulation} />
-        <Button label="Pause" onClick={pauseSimulation} />
+        <Button label="Step" onClick={stepSimulation} />
       </Box>
     </Box>
   );
@@ -52,8 +50,7 @@ Controls.prototype = {
   setNumLevels: PropTypes.func.isRequired,
   bias: PropTypes.number.isRequired,
   setBias: PropTypes.func.isRequired,
-  startSimulation: PropTypes.func.isRequired,
-  pauseSimulation: PropTypes.func.isRequired
+  stepSimulation: PropTypes.func.isRequired
 };
 
 export default Controls;

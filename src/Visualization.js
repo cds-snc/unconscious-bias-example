@@ -3,8 +3,12 @@ import PropTypes from "prop-types";
 import { Box, Text } from "grommet";
 
 const Visualization = props => {
-  let ratioArray = JSON.parse(JSON.stringify(props.ratioArray)).reverse();
+  const countArray = JSON.parse(JSON.stringify(props.countArray)).reverse();
 
+  const ratioArray = countArray.map(([a, b]) => [
+    (100 * a) / (a + b),
+    (100 * b) / (a + b)
+  ]);
   return (
     <Box width="70%">
       {ratioArray.map((ratios, index) => (
@@ -22,12 +26,12 @@ const Visualization = props => {
           <Box direction="row" flex>
             <Box width={`${ratios[0]}%`} background="light-3">
               <Text margin={{ left: "5px" }} size="large">
-                {ratios[0]}
+                {countArray[index][0]}
               </Text>
             </Box>
             <Box width={`${ratios[1]}%`} background="brand" align="end">
               <Text margin={{ right: "5px" }} size="large">
-                {ratios[1]}
+                {countArray[index][1]}
               </Text>
             </Box>
           </Box>
@@ -38,7 +42,7 @@ const Visualization = props => {
 };
 
 Visualization.propTypes = {
-  ratioArray: PropTypes.array.isRequired
+  countArray: PropTypes.array.isRequired
 };
 
 export default Visualization;
