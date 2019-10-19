@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Box, Button, Grommet, Heading, Text } from "grommet";
-import { Trans } from "@lingui/macro";
-import { I18nProvider, I18n } from "@lingui/react";
+import { Box, Grommet } from "grommet";
+import { I18nProvider } from "@lingui/react";
 import AppBar from "./AppBar";
+import Controls from "./Controls";
 import Visualization from "./Visualization";
 import catalogEn from "./locales/en/messages.js";
 import catalogFr from "./locales/fr/messages.js";
@@ -23,40 +23,41 @@ const theme = {
 
 const App = () => {
   const [lang, setLang] = useState("en");
+  const [ratioArray, setRatioArray] = useState([[50, 50], [40, 60]]);
+  const [numLevels, setNumLevels] = useState(5);
+
+  const reset = () => {
+    setRatioArray([...Array(numLevels).keys()].map(level => [50, 50]));
+  };
 
   return (
     <I18nProvider language={lang} catalogs={{ en: catalogEn, fr: catalogFr }}>
-      <I18n>
-        {({ i18n }) => (
-          <Grommet theme={theme}>
-            <Box fill>
-              <AppBar>
-                <Box>
-                  <Heading level="1" size="small" margin="none">
-                    <Trans>Unconscious Bias Example</Trans>
-                  </Heading>
-                </Box>
-
-                <Box width="10%" direction="row" justify="end">
-                  <Button
-                    plain
-                    label={
-                      <Text size="medium">
-                        <Trans>other-lang</Trans>
-                      </Text>
-                    }
-                    onClick={() => {
-                      setLang(i18n._("other-lang"));
-                    }}
-                  />
-                </Box>
-              </AppBar>
-
-              <Visualization />
+      <Grommet theme={theme}>
+        <Box fill>
+          <AppBar setLang={setLang} />
+          <Box
+            justify="center"
+            align="center"
+            direction="column"
+            flex
+            overflow={{ horizontal: "hidden" }}
+          >
+            <Box
+              flex
+              align="center"
+              justify="center"
+              pad={{ horizontal: "5%", top: "5%", bottom: "2%" }}
+            >
+              <Controls
+                doReset={reset}
+                numLevels={numLevels}
+                setNumLevels={setNumLevels}
+              />
             </Box>
-          </Grommet>
-        )}
-      </I18n>
+            <Visualization ratioArray={ratioArray} />
+          </Box>
+        </Box>
+      </Grommet>
     </I18nProvider>
   );
 };
