@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { Box, Text } from "grommet";
 
 const Visualization = props => {
-  const { ratioArray } = props;
+  let ratioArray = JSON.parse(JSON.stringify(props.ratioArray));
+  ratioArray.reverse();
 
   return (
     <Box width="70%">

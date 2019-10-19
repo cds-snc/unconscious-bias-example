@@ -25,9 +25,11 @@ const App = () => {
   const [lang, setLang] = useState("en");
   const [ratioArray, setRatioArray] = useState([[50, 50], [40, 60]]);
   const [numLevels, setNumLevels] = useState(5);
+  const [bias, setBias] = useState(1);
 
   const reset = () => {
-    setRatioArray([...Array(numLevels).keys()].map(level => [50, 50]));
+    console.log({ numLevels });
+    setRatioArray([...Array(numLevels).keys()].map(_ => [50, 50]));
   };
 
   return (
@@ -52,6 +54,8 @@ const App = () => {
                 doReset={reset}
                 numLevels={numLevels}
                 setNumLevels={setNumLevels}
+                bias={bias}
+                setBias={setBias}
               />
             </Box>
             <Visualization ratioArray={ratioArray} />
