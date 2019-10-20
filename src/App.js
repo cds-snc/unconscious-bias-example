@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import { Box, Button, Grommet, Heading, Text } from "grommet";
-import { Trans } from "@lingui/macro";
-import { I18nProvider, I18n } from "@lingui/react";
+import { Box, Grommet, Text } from "grommet";
+import { I18nProvider } from "@lingui/react";
+import AppBar from "./AppBar";
+import Controls from "./Controls";
+import Visualization from "./Visualization";
+import {
+  countGenders,
+  fillRandomly,
+  stepAllLevels
+} from "./utils/employeeUtils";
+import { copy } from "./utils/miscUtils";
 import catalogEn from "./locales/en/messages.js";
 import catalogFr from "./locales/fr/messages.js";
 
@@ -19,73 +27,78 @@ const theme = {
   }
 };
 
-const AppBar = props => (
-  <Box
-    tag="header"
-    direction="row"
-    align="center"
-    justify="between"
-    background="brand"
-    pad={{ left: "medium", right: "medium", vertical: "small" }}
-    elevation="medium"
-    style={{ zIndex: "1" }}
-    {...props}
-  />
-);
-
 const App = () => {
   const [lang, setLang] = useState("en");
+  const [numLevels, setNumLevels] = useState(6);
+  const [employeesPerLevel, setEmployeesPerLevel] = useState([
+    1000,
+    200,
+    40,
+    10,
+    5,
+    1
+  ]);
+  const [levels, setLevels] = useState([]);
+  const [bias, setBias] = useState(100);
+  const [attritionRate, setAttritionRate] = useState(15);
+  const [time, setTime] = useState(0);
+
+  const reset = () => {
+    let newLevels = [];
+    for (let levelIndex = 0; levelIndex < numLevels; levelIndex++) {
+      let newLevel = [...Array(employeesPerLevel[levelIndex]).keys()].map(
+        _ => ({
+          boxStatus: "vacant"
+        })
+      );
+      newLevel = fillRandomly(newLevel, bias);
+      newLevels.push(copy(newLevel));
+    }
+    setLevels(newLevels);
+    setTime(0);
+  };
+
+  const stepSimulation = () => {
+    setTime(time + 1);
+    setLevels(stepAllLevels(levels, attritionRate, bias));
+  };
+
+  const countArray = levels.map(level => countGenders(level));
 
   return (
     <I18nProvider language={lang} catalogs={{ en: catalogEn, fr: catalogFr }}>
-      <I18n>
-        {({ i18n }) => (
-          <Grommet theme={theme}>
-            <Box fill>
-              <AppBar>
-                <Box>
-                  <Heading level="1" size="small" margin="none">
-                    <Trans>Unconscious Bias Example</Trans>
-                  </Heading>
-                </Box>
-
-                <Box width="10%" direction="row" justify="end">
-                  <Button
-                    plain
-                    label={
-                      <Text size="medium">
-                        <Trans>other-lang</Trans>
-                      </Text>
-                    }
-                    onClick={() => {
-                      setLang(i18n._("other-lang"));
-                    }}
-                  />
-                </Box>
-              </AppBar>
-
-              <Box
-                justify="center"
-                align="center"
-                direction="column"
-                flex
-                overflow={{ horizontal: "hidden" }}
-              >
-                <Box
-                  flex
-                  align="center"
-                  justify="center"
-                  pad={{ horizontal: "5%", top: "5%", bottom: "2%" }}
-                >
-                  Controls
-                </Box>
-
-                <Box>Body</Box>
-              </Box>
+      <Grommet theme={theme}>
+        <Box fill>
+          <AppBar setLang={setLang} />
+          <Box
+            justify="center"
+            align="center"
+            direction="column"
+            flex
+            overflow={{ horizontal: "hidden" }}
+          >
+            <Box
+              flex
+              align="center"
+              justify="center"
+              pad={{ horizontal: "5%", top: "5%", bottom: "2%" }}
+            >
+              <Controls
+                doReset={reset}
+                numLevels={numLevels}
+                setNumLevels={setNumLevels}
+                bias={bias}
+                setBias={setBias}
+                stepSimulation={stepSimulation}
+              />
             </Box>
-          </Grommet>
-        )}
-      </I18n>
+            <Text margin={{ top: "medium", bottom: "small" }}>
+              Time: {time}
+            </Text>
+            <Visualization countArray={countArray} />
+          </Box>
+        </Box>
+      </Grommet>
     </I18nProvider>
   );
 };
