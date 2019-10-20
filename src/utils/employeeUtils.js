@@ -15,7 +15,8 @@ function compareEmployees(a, b) {
 
 const attrition = (level, attritionRate) => {
   return level.map(employee => ({
-    boxStatus: Math.random() < attritionRate ? "vacant" : employee.boxStatus,
+    boxStatus:
+      Math.random() < attritionRate / 100.0 ? "vacant" : employee.boxStatus,
     gender: employee.gender,
     score: employee.score
   }));
@@ -70,6 +71,7 @@ export const fillRandomly = (level, bias) => {
 export const stepAllLevels = (levels, attritionRate, bias) => {
   // people across the department quit
   let newLevels = levels.map(level => attrition(level, attritionRate));
+
   // now we have to fill the vacancies, starting at the top (don't want to promote someone twice)
   for (let levelIndex = newLevels.length - 1; levelIndex >= 1; levelIndex--) {
     [newLevels[levelIndex], newLevels[levelIndex - 1]] = fillByPromotion(

@@ -29,11 +29,18 @@ const theme = {
 
 const App = () => {
   const [lang, setLang] = useState("en");
-  const [numLevels, setNumLevels] = useState(3);
-  const [employeesPerLevel, setEmployeesPerLevel] = useState([100, 30, 10]);
+  const [numLevels, setNumLevels] = useState(6);
+  const [employeesPerLevel, setEmployeesPerLevel] = useState([
+    1000,
+    200,
+    40,
+    10,
+    5,
+    1
+  ]);
   const [levels, setLevels] = useState([]);
-  const [bias, setBias] = useState(1);
-  const [attritionRate, setAttritionRate] = useState(10);
+  const [bias, setBias] = useState(100);
+  const [attritionRate, setAttritionRate] = useState(15);
   const [time, setTime] = useState(0);
 
   const reset = () => {
@@ -47,8 +54,8 @@ const App = () => {
       newLevel = fillRandomly(newLevel, bias);
       newLevels.push(copy(newLevel));
     }
-    console.log(newLevels);
     setLevels(newLevels);
+    setTime(0);
   };
 
   const stepSimulation = () => {
@@ -85,7 +92,9 @@ const App = () => {
                 stepSimulation={stepSimulation}
               />
             </Box>
-            <Text>Time: {time}</Text>
+            <Text margin={{ top: "medium", bottom: "small" }}>
+              Time: {time}
+            </Text>
             <Visualization countArray={countArray} />
           </Box>
         </Box>
