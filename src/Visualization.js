@@ -21,7 +21,7 @@ const Visualization = props => {
           }}
         >
           <Text width="100px" margin={{ right: "5px" }}>
-            Level {ratioArray.length - index}
+            Level {ratioArray.length - index - 1}
           </Text>
           <Box direction="row" flex>
             <Box width={`${ratios[0]}%`} background="light-3">

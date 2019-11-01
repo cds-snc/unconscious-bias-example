@@ -5,27 +5,18 @@ import { Box, Button, Heading, FormField, RangeInput } from "grommet";
 const Controls = props => {
   const {
     doReset,
-    numLevels,
-    setNumLevels,
     bias,
     setBias,
+    attritionRate, setAttritionRate,
     stepSimulation
   } = props;
 
   return (
     <Box>
       <Heading level={2} size="small" margin={{ bottom: "large" }}>
-        Levels: {numLevels} &nbsp; &nbsp; Bias: {bias}%
+      Bias: {bias}% &nbsp; &nbsp; Attrition: {attritionRate}% 
       </Heading>
 
-      <FormField name="levels" label="Number of Levels">
-        <RangeInput
-          min={2}
-          max={10}
-          value={numLevels}
-          onChange={event => setNumLevels(parseInt(event.target.value))}
-        />
-      </FormField>
       <FormField label="Bias">
         <RangeInput
           label="Num Levels"
@@ -36,6 +27,16 @@ const Controls = props => {
         />
       </FormField>
 
+      <FormField label="Attrition">
+        <RangeInput
+          label="AttritionRate"
+          min={0}
+          max={25}
+          value={attritionRate}
+          onChange={event => setAttritionRate(parseInt(event.target.value))}
+        />
+      </FormField>
+      
       <Box direction="row" gap="medium" margin={{ vertical: "medium" }}>
         <Button label="Reset" onClick={doReset} />
         <Button label="Step" onClick={stepSimulation} />
@@ -46,10 +47,10 @@ const Controls = props => {
 
 Controls.prototype = {
   doReset: PropTypes.func.isRequired,
-  numLevels: PropTypes.number.isRequired,
-  setNumLevels: PropTypes.func.isRequired,
   bias: PropTypes.number.isRequired,
   setBias: PropTypes.func.isRequired,
+  attritionRate: PropTypes.number.isRequired,
+  setAttritionRate: PropTypes.func.isRequired,
   stepSimulation: PropTypes.func.isRequired
 };
 

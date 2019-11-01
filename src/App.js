@@ -29,8 +29,9 @@ const theme = {
 
 const App = () => {
   const [lang, setLang] = useState("en");
-  const [numLevels, setNumLevels] = useState(6);
+  const [numLevels, setNumLevels] = useState(7);
   const [employeesPerLevel, setEmployeesPerLevel] = useState([
+    4000,
     1000,
     200,
     40,
@@ -39,7 +40,7 @@ const App = () => {
     1
   ]);
   const [levels, setLevels] = useState([]);
-  const [bias, setBias] = useState(100);
+  const [bias, setBias] = useState(10);
   const [attritionRate, setAttritionRate] = useState(15);
   const [time, setTime] = useState(0);
 
@@ -85,10 +86,10 @@ const App = () => {
             >
               <Controls
                 doReset={reset}
-                numLevels={numLevels}
-                setNumLevels={setNumLevels}
                 bias={bias}
                 setBias={setBias}
+                attritionRate={attritionRate}
+                setAttritionRate={setAttritionRate}
                 stepSimulation={stepSimulation}
               />
             </Box>
