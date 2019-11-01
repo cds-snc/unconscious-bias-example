@@ -31,7 +31,7 @@ const Visualization = props => {
               </Text>
             </Box>
             <Box width={`${ratios[1]}%`} background="maleBars" align="end">
-              <Text margin={{ right: "5px" }} size="large">
+              <Text color="white" margin={{ right: "5px" }} size="large">
                 {countArray[index][1]}
               </Text>
             </Box>
