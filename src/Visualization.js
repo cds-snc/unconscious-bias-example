@@ -25,12 +25,12 @@ const Visualization = props => {
             <Trans>Level</Trans> {ratioArray.length - index - 1}
           </Text>
           <Box direction="row" flex>
-            <Box width={`${ratios[0]}%`} background="light-3">
+            <Box width={`${ratios[0]}%`} background="femaleBars">
               <Text margin={{ left: "5px" }} size="large">
                 {countArray[index][0]}
               </Text>
             </Box>
-            <Box width={`${ratios[1]}%`} background="brand" align="end">
+            <Box width={`${ratios[1]}%`} background="maleBars" align="end">
               <Text margin={{ right: "5px" }} size="large">
                 {countArray[index][1]}
               </Text>

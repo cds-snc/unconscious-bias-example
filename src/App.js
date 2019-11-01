@@ -17,7 +17,9 @@ import catalogFr from "./locales/fr/messages.js";
 const theme = {
   global: {
     colors: {
-      brand: "#228BE6"
+      brand: "#228BE6",
+      maleBars: "#5c97bf",
+      femaleBars: "#d24d57"
     },
 
     font: {
