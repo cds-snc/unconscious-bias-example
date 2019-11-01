@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Grommet, Text } from "grommet";
 import { I18nProvider } from "@lingui/react";
+import { Trans } from "@lingui/macro";
 import AppBar from "./AppBar";
 import Controls from "./Controls";
 import Visualization from "./Visualization";
@@ -9,14 +10,16 @@ import {
   fillRandomly,
   stepAllLevels
 } from "./utils/employeeUtils";
-import { copy } from "./utils/miscUtils";
+import { copy, useInterval } from "./utils/miscUtils";
 import catalogEn from "./locales/en/messages.js";
 import catalogFr from "./locales/fr/messages.js";
 
 const theme = {
   global: {
     colors: {
-      brand: "#228BE6"
+      brand: "#228BE6",
+      maleBars: "#5c97bf",
+      femaleBars: "#d24d57"
     },
 
     font: {
@@ -29,8 +32,9 @@ const theme = {
 
 const App = () => {
   const [lang, setLang] = useState("en");
-  const [numLevels, setNumLevels] = useState(6);
+  const [numLevels, setNumLevels] = useState(7);
   const [employeesPerLevel, setEmployeesPerLevel] = useState([
+    4000,
     1000,
     200,
     40,
@@ -39,11 +43,13 @@ const App = () => {
     1
   ]);
   const [levels, setLevels] = useState([]);
-  const [bias, setBias] = useState(100);
+  const [bias, setBias] = useState(5);
   const [attritionRate, setAttritionRate] = useState(15);
   const [time, setTime] = useState(0);
+  const [isSimulationRunning, setIsSimulationRunning] = useState(false);
 
   const reset = () => {
+    setIsSimulationRunning(false);
     let newLevels = [];
     for (let levelIndex = 0; levelIndex < numLevels; levelIndex++) {
       let newLevel = [...Array(employeesPerLevel[levelIndex]).keys()].map(
@@ -59,12 +65,22 @@ const App = () => {
   };
 
   const stepSimulation = () => {
-    setTime(time + 1);
-    setLevels(stepAllLevels(levels, attritionRate, bias));
+    if (isSimulationRunning) {
+      setTime(time + 1);
+      setLevels(stepAllLevels(levels, attritionRate, bias));
+    }
   };
 
-  const countArray = levels.map(level => countGenders(level));
+  // reset when app loads
+  useEffect(reset, []);
 
+  // start the simulation
+
+  useInterval(() => {
+    stepSimulation();
+  }, 500);
+
+  const countArray = levels.map(level => countGenders(level));
   return (
     <I18nProvider language={lang} catalogs={{ en: catalogEn, fr: catalogFr }}>
       <Grommet theme={theme}>
@@ -85,18 +101,53 @@ const App = () => {
             >
               <Controls
                 doReset={reset}
-                numLevels={numLevels}
-                setNumLevels={setNumLevels}
                 bias={bias}
                 setBias={setBias}
-                stepSimulation={stepSimulation}
+                attritionRate={attritionRate}
+                setAttritionRate={setAttritionRate}
+                isSimulationRunning={isSimulationRunning}
+                toggleIsSimulationRunning={() =>
+                  setIsSimulationRunning(!isSimulationRunning)
+                }
               />
             </Box>
-            <Text margin={{ top: "medium", bottom: "small" }}>
-              Time: {time}
-            </Text>
             <Visualization countArray={countArray} />
           </Box>
+
+          <Text margin="large">
+            <ul>
+              <li>
+                <Trans>
+                  Each employee has an <strong>Attrition</strong> chance of
+                  quitting each year.
+                </Trans>
+              </li>
+              <li>
+                <Trans>
+                  Vacancies are filled by promoting the top scoring worker from
+                  the previous level.
+                </Trans>
+              </li>
+              <li>
+                <Trans>
+                  The lowest level workers are randomly assigned a gender and a
+                  score.
+                </Trans>
+              </li>
+              <li>
+                <Trans>
+                  The scores for females are randomly selected from the range
+                  [0, 100]
+                </Trans>
+              </li>
+              <li>
+                <Trans>
+                  The scores for males are randomly selected from the range [
+                  <strong>Bias</strong>, 100 + <strong>Bias</strong>]
+                </Trans>
+              </li>
+            </ul>
+          </Text>
         </Box>
       </Grommet>
     </I18nProvider>
