@@ -7,15 +7,23 @@ const Controls = props => {
     doReset,
     bias,
     setBias,
-    attritionRate, setAttritionRate,
+    attritionRate,
+    setAttritionRate,
     stepSimulation
   } = props;
 
   return (
-    <Box>
-      <Heading level={2} size="small" margin={{ bottom: "large" }}>
-      Bias: {bias}% &nbsp; &nbsp; Attrition: {attritionRate}% 
-      </Heading>
+    <Box width="medium">
+      <Box>
+        <Heading
+          level={2}
+          size="small"
+          margin={{ bottom: "large" }}
+          textAlign="center"
+        >
+          Bias: {bias}% &nbsp; &nbsp; Attrition: {attritionRate}%
+        </Heading>
+      </Box>
 
       <FormField label="Bias">
         <RangeInput
@@ -36,7 +44,7 @@ const Controls = props => {
           onChange={event => setAttritionRate(parseInt(event.target.value))}
         />
       </FormField>
-      
+
       <Box direction="row" gap="medium" margin={{ vertical: "medium" }}>
         <Button label="Reset" onClick={doReset} />
         <Button label="Step" onClick={stepSimulation} />

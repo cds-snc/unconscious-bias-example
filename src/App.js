@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Grommet, Text } from "grommet";
 import { I18nProvider } from "@lingui/react";
 import AppBar from "./AppBar";
@@ -64,8 +64,9 @@ const App = () => {
     setLevels(stepAllLevels(levels, attritionRate, bias));
   };
 
-  const countArray = levels.map(level => countGenders(level));
+  useEffect(reset, []);
 
+  const countArray = levels.map(level => countGenders(level));
   return (
     <I18nProvider language={lang} catalogs={{ en: catalogEn, fr: catalogFr }}>
       <Grommet theme={theme}>
