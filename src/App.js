@@ -9,7 +9,7 @@ import {
   fillRandomly,
   stepAllLevels
 } from "./utils/employeeUtils";
-import { copy } from "./utils/miscUtils";
+import { copy, useInterval } from "./utils/miscUtils";
 import catalogEn from "./locales/en/messages.js";
 import catalogFr from "./locales/fr/messages.js";
 
@@ -40,11 +40,13 @@ const App = () => {
     1
   ]);
   const [levels, setLevels] = useState([]);
-  const [bias, setBias] = useState(10);
+  const [bias, setBias] = useState(5);
   const [attritionRate, setAttritionRate] = useState(15);
   const [time, setTime] = useState(0);
+  const [isSimulationRunning, setIsSimulationRunning] = useState(false);
 
   const reset = () => {
+    setIsSimulationRunning(false);
     let newLevels = [];
     for (let levelIndex = 0; levelIndex < numLevels; levelIndex++) {
       let newLevel = [...Array(employeesPerLevel[levelIndex]).keys()].map(
@@ -60,11 +62,20 @@ const App = () => {
   };
 
   const stepSimulation = () => {
-    setTime(time + 1);
-    setLevels(stepAllLevels(levels, attritionRate, bias));
+    if (isSimulationRunning) {
+      setTime(time + 1);
+      setLevels(stepAllLevels(levels, attritionRate, bias));
+    }
   };
 
+  // reset when app loads
   useEffect(reset, []);
+
+  // start the simulation
+
+  useInterval(() => {
+    stepSimulation();
+  }, 500);
 
   const countArray = levels.map(level => countGenders(level));
   return (
@@ -91,7 +102,10 @@ const App = () => {
                 setBias={setBias}
                 attritionRate={attritionRate}
                 setAttritionRate={setAttritionRate}
-                stepSimulation={stepSimulation}
+                isSimulationRunning={isSimulationRunning}
+                toggleIsSimulationRunning={() =>
+                  setIsSimulationRunning(!isSimulationRunning)
+                }
               />
             </Box>
             <Text margin={{ top: "medium", bottom: "small" }}>

@@ -9,7 +9,8 @@ const Controls = props => {
     setBias,
     attritionRate,
     setAttritionRate,
-    stepSimulation
+    isSimulationRunning,
+    toggleIsSimulationRunning
   } = props;
 
   return (
@@ -45,9 +46,17 @@ const Controls = props => {
         />
       </FormField>
 
-      <Box direction="row" gap="medium" margin={{ vertical: "medium" }}>
+      <Box
+        direction="row"
+        gap="medium"
+        justify="center"
+        margin={{ vertical: "medium" }}
+      >
         <Button label="Reset" onClick={doReset} />
-        <Button label="Step" onClick={stepSimulation} />
+        <Button
+          label={isSimulationRunning ? "Stop" : "Start"}
+          onClick={toggleIsSimulationRunning}
+        />
       </Box>
     </Box>
   );
@@ -59,7 +68,8 @@ Controls.prototype = {
   setBias: PropTypes.func.isRequired,
   attritionRate: PropTypes.number.isRequired,
   setAttritionRate: PropTypes.func.isRequired,
-  stepSimulation: PropTypes.func.isRequired
+  isSimulationRunning: PropTypes.bool.isRequired,
+  toggleIsSimulationRunning: PropTypes.func.isRequired
 };
 
 export default Controls;
