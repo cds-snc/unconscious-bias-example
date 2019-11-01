@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grommet } from "grommet";
+import { Box, Grommet, Text } from "grommet";
 import { I18nProvider } from "@lingui/react";
+import { Trans } from "@lingui/macro";
 import AppBar from "./AppBar";
 import Controls from "./Controls";
 import Visualization from "./Visualization";
@@ -110,6 +111,41 @@ const App = () => {
             </Box>
             <Visualization countArray={countArray} />
           </Box>
+
+          <Text margin="large">
+            <ul>
+              <li>
+                <Trans>
+                  Each employee has an <strong>Attrition</strong> chance of
+                  quitting each year.
+                </Trans>
+              </li>
+              <li>
+                <Trans>
+                  Vacancies are filled by promoting the top scoring worker from
+                  the previous level.
+                </Trans>
+              </li>
+              <li>
+                <Trans>
+                  The lowest level workers are randomly assigned a gender and a
+                  score.
+                </Trans>
+              </li>
+              <li>
+                <Trans>
+                  The scores for females are randomly selected from the range
+                  [0, 100]
+                </Trans>
+              </li>
+              <li>
+                <Trans>
+                  The scores for males are randomly selected from the range [
+                  <strong>Bias</strong>, 100 + <strong>Bias</strong>]
+                </Trans>
+              </li>
+            </ul>
+          </Text>
         </Box>
       </Grommet>
     </I18nProvider>

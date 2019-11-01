@@ -1,10 +1,15 @@
 {
   "Attrition": "Attrition",
   "Bias": "Bias",
+  "Each employee has an <0>Attrition</0> chance of quitting each year.": "Each employee has an <0>Attrition</0> chance of quitting each year.",
   "Level": "Level",
   "Reset": "Reset",
   "Start": "Start",
   "Stop": "Stop",
+  "The lowest level workers are randomly assigned a gender and a score.": "The lowest level workers are randomly assigned a gender and a score.",
+  "The scores for females are randomly selected from the range [0, 100]": "The scores for females are randomly selected from the range [0, 100]",
+  "The scores for males are randomly selected from the range [<0>Bias</0>, 100 + <1>Bias</1>]": "The scores for males are randomly selected from the range [<0>Bias</0>, 100 + <1>Bias</1>]",
   "Unconscious Bias Example": "Unconscious Bias Example",
+  "Vacancies are filled by promoting the top scoring worker from the previous level.": "Vacancies are filled by promoting the top scoring worker from the previous level.",
   "other-lang": "fr"
 }
