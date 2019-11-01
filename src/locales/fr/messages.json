@@ -8,7 +8,7 @@
   "Stop": "Halte",
   "The lowest level workers are randomly assigned a gender and a score.": "Les travailleurs du niveau le plus bas se voient attribuer au hasard un sexe et un score.",
   "The scores for females are randomly selected from the range [0, 100]": "Les scores des femmes sont choisis au hasard dans la fourchette [0, 100].",
-  "The scores for males are randomly selected from the range [<0>Bias</0>, 100 + <1>Bias</1>]": "Les scores des hommes sont choisis au hasard dans la fourchette[<0>Biais</0>, 100 + <1>Biais</1>].",
+  "The scores for males are randomly selected from the range [<0>Bias</0>, 100 + <1>Bias</1>]": "Les scores des hommes sont choisis au hasard dans la fourchette [<0>Biais</0>, 100 + <1>Biais</1>].",
   "Unconscious Bias Example": "Exemple de biais inconscient",
   "Vacancies are filled by promoting the top scoring worker from the previous level.": "Les postes vacants sont comblés en promouvant l'employé ayant obtenu les meilleurs résultats au niveau précédent.",
   "other-lang": "en"
