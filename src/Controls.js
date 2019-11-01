@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Heading, FormField, RangeInput } from "grommet";
+import { Trans } from "@lingui/macro";
+import { I18n } from "@lingui/react";
 
 const Controls = props => {
   const {
@@ -14,51 +16,56 @@ const Controls = props => {
   } = props;
 
   return (
-    <Box width="medium">
-      <Box>
-        <Heading
-          level={2}
-          size="small"
-          margin={{ bottom: "large" }}
-          textAlign="center"
-        >
-          Bias: {bias}% &nbsp; &nbsp; Attrition: {attritionRate}%
-        </Heading>
-      </Box>
+    <I18n>
+      {({ i18n }) => (
+        <Box width="medium">
+          <Box>
+            <Heading
+              level={2}
+              size="small"
+              margin={{ bottom: "large" }}
+              textAlign="center"
+            >
+              <Trans>Bias</Trans>: {bias}% &nbsp; &nbsp;
+              <Trans>Attrition</Trans>: {attritionRate}%
+            </Heading>
+          </Box>
 
-      <FormField label="Bias">
-        <RangeInput
-          label="Num Levels"
-          min={0}
-          max={10}
-          value={bias}
-          onChange={event => setBias(parseInt(event.target.value))}
-        />
-      </FormField>
+          <FormField label={i18n._("Bias")}>
+            <RangeInput
+              label="Bias"
+              min={0}
+              max={10}
+              value={bias}
+              onChange={event => setBias(parseInt(event.target.value))}
+            />
+          </FormField>
 
-      <FormField label="Attrition">
-        <RangeInput
-          label="AttritionRate"
-          min={0}
-          max={25}
-          value={attritionRate}
-          onChange={event => setAttritionRate(parseInt(event.target.value))}
-        />
-      </FormField>
+          <FormField label={i18n._("Attrition")}>
+            <RangeInput
+              label="AttritionRate"
+              min={0}
+              max={25}
+              value={attritionRate}
+              onChange={event => setAttritionRate(parseInt(event.target.value))}
+            />
+          </FormField>
 
-      <Box
-        direction="row"
-        gap="medium"
-        justify="center"
-        margin={{ vertical: "medium" }}
-      >
-        <Button label="Reset" onClick={doReset} />
-        <Button
-          label={isSimulationRunning ? "Stop" : "Start"}
-          onClick={toggleIsSimulationRunning}
-        />
-      </Box>
-    </Box>
+          <Box
+            direction="row"
+            gap="medium"
+            justify="center"
+            margin={{ vertical: "medium" }}
+          >
+            <Button label={i18n._("Reset")} onClick={doReset} />
+            <Button
+              label={isSimulationRunning ? i18n._("Stop") : i18n._("Start")}
+              onClick={toggleIsSimulationRunning}
+            />
+          </Box>
+        </Box>
+      )}
+    </I18n>
   );
 };
 

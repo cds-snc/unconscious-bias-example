@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grommet, Text } from "grommet";
+import { Box, Grommet } from "grommet";
 import { I18nProvider } from "@lingui/react";
 import AppBar from "./AppBar";
 import Controls from "./Controls";
@@ -108,9 +108,6 @@ const App = () => {
                 }
               />
             </Box>
-            <Text margin={{ top: "medium", bottom: "small" }}>
-              Time: {time}
-            </Text>
             <Visualization countArray={countArray} />
           </Box>
         </Box>

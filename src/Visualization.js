@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box, Text } from "grommet";
+import { Trans } from "@lingui/macro";
 
 const Visualization = props => {
   const countArray = JSON.parse(JSON.stringify(props.countArray)).reverse();
@@ -21,7 +22,7 @@ const Visualization = props => {
           }}
         >
           <Text width="100px" margin={{ right: "5px" }}>
-            Level {ratioArray.length - index - 1}
+            <Trans>Level</Trans> {ratioArray.length - index - 1}
           </Text>
           <Box direction="row" flex>
             <Box width={`${ratios[0]}%`} background="light-3">
