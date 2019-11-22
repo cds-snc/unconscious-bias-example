@@ -16,12 +16,12 @@ import catalogFr from "./locales/fr/messages.js";
 
 const theme = {
   global: {
+    borderSize: "0px",
     colors: {
       brand: "#000000",
       maleBars: "#bbbd20", //"#e0e256",
       femaleBars: "#287aff"
     },
-
     font: {
       family: "Roboto",
       size: "14px",
