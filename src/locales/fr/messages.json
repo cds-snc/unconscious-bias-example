@@ -4,6 +4,7 @@
   "Employees": "Employés",
   "Female": "Femme",
   "Female scores are randomly selected from the range [0, 100]": "Les scores des femmes sont choisis au hasard dans l'intervalle [0, 100].",
+  "Impact of bias on an organization": "Incidence de biais sur une organisation",
   "Male": "Homme",
   "Male scores are randomly selected from the range [{bias}, {0}]": "Les scores des hommes sont choisis au hasard dans l'intervalle [{bias}, {0}].",
   "Reset": "Réinitialiser",
@@ -11,7 +12,6 @@
   "Stop": "Halte",
   "The Employees column gives the number of people at each level of the organization (so at the top is the CEO).": "La colonne Employés donne le nombre de personnes à chaque niveau de l'organisation (donc au sommet se trouve le PDG).",
   "The lowest level workers are randomly assigned a gender and a score.": "Les travailleurs du niveau le plus bas se voient attribuer au hasard un sexe et un score.",
-  "Unconscious Bias Example": "Exemple de biais inconscient",
   "Vacancies are filled by promoting the top scoring worker from the previous level.": "Les postes vacants sont comblés en promouvant l'employé ayant obtenu les meilleurs résultats au niveau précédent.",
   "other-lang": "en"
 }

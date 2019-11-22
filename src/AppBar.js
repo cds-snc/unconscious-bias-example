@@ -23,7 +23,7 @@ const AppBar = props => {
         >
           <Box>
             <Heading level="1" size="small" margin="none">
-              <Trans>Unconscious Bias Example</Trans>
+              <Trans>Impact of bias on an organization</Trans>
             </Heading>
           </Box>
 

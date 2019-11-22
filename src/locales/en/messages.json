@@ -4,6 +4,7 @@
   "Employees": "Employees",
   "Female": "Female",
   "Female scores are randomly selected from the range [0, 100]": "Female scores are randomly selected from the range [0, 100]",
+  "Impact of bias on an organization": "Impact of bias on an organization",
   "Male": "Male",
   "Male scores are randomly selected from the range [{bias}, {0}]": "Male scores are randomly selected from the range [{bias}, {0}]",
   "Reset": "Reset",
@@ -11,7 +12,6 @@
   "Stop": "Stop",
   "The Employees column gives the number of people at each level of the organization (so at the top is the CEO).": "The Employees column gives the number of people at each level of the organization (so at the top is the CEO).",
   "The lowest level workers are randomly assigned a gender and a score.": "The lowest level workers are randomly assigned a gender and a score.",
-  "Unconscious Bias Example": "Unconscious Bias Example",
   "Vacancies are filled by promoting the top scoring worker from the previous level.": "Vacancies are filled by promoting the top scoring worker from the previous level.",
   "other-lang": "fr"
 }

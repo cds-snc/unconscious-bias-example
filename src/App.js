@@ -7,7 +7,6 @@ import Controls from "./Controls";
 import Visualization from "./Visualization";
 import {
   countGenders,
-  fillRandomly,
   fillEqually,
   stepAllLevels
 } from "./utils/employeeUtils";
@@ -33,16 +32,8 @@ const theme = {
 
 const App = () => {
   const [lang, setLang] = useState("en");
-  const [numLevels, setNumLevels] = useState(7);
-  const [employeesPerLevel, setEmployeesPerLevel] = useState([
-    4000,
-    1000,
-    200,
-    40,
-    10,
-    4,
-    1
-  ]);
+  const numLevels = 7;
+  const employeesPerLevel = [4000, 1000, 200, 40, 10, 4, 1];
   const [levels, setLevels] = useState([]);
   const [bias, setBias] = useState(5);
   const [attritionRate, setAttritionRate] = useState(15);
