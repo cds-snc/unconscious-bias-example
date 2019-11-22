@@ -8,6 +8,7 @@ import Visualization from "./Visualization";
 import {
   countGenders,
   fillRandomly,
+  fillEqually,
   stepAllLevels
 } from "./utils/employeeUtils";
 import { copy, useInterval } from "./utils/miscUtils";
@@ -17,9 +18,9 @@ import catalogFr from "./locales/fr/messages.js";
 const theme = {
   global: {
     colors: {
-      brand: "#228BE6",
-      maleBars: "#5c97bf",
-      femaleBars: "#d24d57"
+      brand: "#000000",
+      maleBars: "#bbbd20", //"#e0e256",
+      femaleBars: "#287aff"
     },
 
     font: {
@@ -39,7 +40,7 @@ const App = () => {
     200,
     40,
     10,
-    5,
+    4,
     1
   ]);
   const [levels, setLevels] = useState([]);
@@ -57,7 +58,7 @@ const App = () => {
           boxStatus: "vacant"
         })
       );
-      newLevel = fillRandomly(newLevel, bias);
+      newLevel = fillEqually(newLevel, 0);
       newLevels.push(copy(newLevel));
     }
     setLevels(newLevels);
@@ -118,8 +119,14 @@ const App = () => {
             <ul>
               <li>
                 <Trans>
-                  Each employee has an <strong>Attrition</strong> chance of
-                  quitting each year.
+                  The Employees column gives the number of people at each level
+                  of the organization (so at the top is the CEO).
+                </Trans>
+              </li>
+              <li>
+                <Trans>
+                  Each employee has a {attritionRate}% chance of quitting each
+                  year.
                 </Trans>
               </li>
               <li>
@@ -136,14 +143,13 @@ const App = () => {
               </li>
               <li>
                 <Trans>
-                  The scores for females are randomly selected from the range
-                  [0, 100]
+                  Female scores are randomly selected from the range [0, 100]
                 </Trans>
               </li>
               <li>
                 <Trans>
-                  The scores for males are randomly selected from the range [
-                  <strong>Bias</strong>, 100 + <strong>Bias</strong>]
+                  Male scores are randomly selected from the range [{bias},{" "}
+                  {100 + bias}]
                 </Trans>
               </li>
             </ul>

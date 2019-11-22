@@ -68,6 +68,23 @@ export const fillRandomly = (level, bias) => {
   return newLevel;
 };
 
+export const fillEqually = (level, bias) => {
+  let newLevel = level.map((employee, index) => {
+    if (employee.boxStatus === "vacant") {
+      const gender = index < level.length / 2 ? "female" : "male";
+      return {
+        boxStatus: "filled",
+        gender,
+        score: getRandomInt(100) + (gender === "male" ? bias : 0)
+      };
+    } else {
+      return employee;
+    }
+  });
+  newLevel.sort(compareEmployees);
+  return newLevel;
+};
+
 export const stepAllLevels = (levels, attritionRate, bias) => {
   // people across the department quit
   let newLevels = levels.map(level => attrition(level, attritionRate));
