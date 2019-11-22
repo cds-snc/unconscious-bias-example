@@ -98,7 +98,7 @@ const App = () => {
               flex
               align="center"
               justify="center"
-              pad={{ horizontal: "5%", top: "5%", bottom: "2%" }}
+              pad={{ horizontal: "5%", top: "medium", bottom: "small" }}
             >
               <Controls
                 doReset={reset}
