@@ -8,6 +8,7 @@ import Visualization from "./Visualization";
 import {
   countGenders,
   fillRandomly,
+  fillEqually,
   stepAllLevels
 } from "./utils/employeeUtils";
 import { copy, useInterval } from "./utils/miscUtils";
@@ -17,7 +18,7 @@ import catalogFr from "./locales/fr/messages.js";
 const theme = {
   global: {
     colors: {
-      brand: "#228BE6",
+      brand: "#000000",
       maleBars: "#bbbd20", //"#e0e256",
       femaleBars: "#287aff"
     },
@@ -39,7 +40,7 @@ const App = () => {
     200,
     40,
     10,
-    5,
+    4,
     1
   ]);
   const [levels, setLevels] = useState([]);
@@ -57,7 +58,7 @@ const App = () => {
           boxStatus: "vacant"
         })
       );
-      newLevel = fillRandomly(newLevel, bias);
+      newLevel = fillEqually(newLevel, 0);
       newLevels.push(copy(newLevel));
     }
     setLevels(newLevels);
@@ -116,6 +117,12 @@ const App = () => {
 
           <Text margin="large">
             <ul>
+              <li>
+                <Trans>
+                  The Employees column gives the number of people at each level
+                  of the organization (so at the top is the CEO).
+                </Trans>
+              </li>
               <li>
                 <Trans>
                   Each employee has a {attritionRate}% chance of quitting each

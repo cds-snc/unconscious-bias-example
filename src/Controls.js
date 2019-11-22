@@ -9,8 +9,8 @@ const Controls = props => {
     doReset,
     bias,
     setBias,
-    attritionRate,
-    setAttritionRate,
+    // attritionRate,
+    // setAttritionRate,
     isSimulationRunning,
     toggleIsSimulationRunning
   } = props;
