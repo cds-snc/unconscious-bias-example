@@ -27,7 +27,7 @@ const Controls = props => {
               textAlign="center"
             >
               <Trans>Bias</Trans>: {bias}% &nbsp; &nbsp;
-              <Trans>Attrition</Trans>: {attritionRate}%
+              {/* <Trans>Attrition</Trans>: {attritionRate}% */}
             </Heading>
           </Box>
 
@@ -41,7 +41,7 @@ const Controls = props => {
             />
           </FormField>
 
-          <FormField label={i18n._("Attrition")}>
+          {/* <FormField label={i18n._("Attrition")}>
             <RangeInput
               label="AttritionRate"
               min={0}
@@ -49,7 +49,7 @@ const Controls = props => {
               value={attritionRate}
               onChange={event => setAttritionRate(parseInt(event.target.value))}
             />
-          </FormField>
+          </FormField> */}
 
           <Box
             direction="row"
