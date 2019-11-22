@@ -12,6 +12,42 @@ const Visualization = props => {
   ]);
   return (
     <Box width="70%">
+      <Box
+        direction="row"
+        flex
+        margin={{
+          vertical: "5px"
+        }}
+      >
+        <Box width="100px" align="end">
+          <Text margin={{ right: "5px" }}>
+            <Trans>Employees&nbsp;&nbsp;</Trans>
+          </Text>
+        </Box>
+        <Box direction="row" flex>
+          <Box width="50%">
+            <Text
+              weight="bold"
+              margin={{ left: "5px" }}
+              size="large"
+              color="femaleBars"
+            >
+              <Trans>Female</Trans>
+            </Text>
+          </Box>
+          <Box width="50%" align="end">
+            <Text
+              weight="bold"
+              margin={{ right: "5px" }}
+              size="large"
+              color="maleBars"
+            >
+              <Trans>Male</Trans>
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+
       {ratioArray.map((ratios, index) => (
         <Box
           key={index}
@@ -21,19 +57,25 @@ const Visualization = props => {
             vertical: "5px"
           }}
         >
-          <Text width="100px" margin={{ right: "5px" }}>
-            <Trans>Level</Trans> {ratioArray.length - index - 1}
-          </Text>
+          <Box width="100px" align="end">
+            <Text margin={{ right: "5px" }}>
+              {countArray[index][0] + countArray[index][1]}&nbsp;&nbsp;
+            </Text>
+          </Box>
           <Box direction="row" flex>
-            <Box width={`${ratios[0]}%`} background="femaleBars">
-              <Text margin={{ left: "5px" }} size="large">
-                {countArray[index][0]}
-              </Text>
+            <Box width={`${ratios[0]}%`} background="femaleBars" align="end">
+              {ratios[0] > 0.05 ? (
+                <Text margin={{ left: "5px" }} size="large">
+                  {`${Math.round(ratios[0])}%`}&nbsp;
+                </Text>
+              ) : null}
             </Box>
-            <Box width={`${ratios[1]}%`} background="maleBars" align="end">
-              <Text color="white" margin={{ right: "5px" }} size="large">
-                {countArray[index][1]}
-              </Text>
+            <Box width={`${ratios[1]}%`} background="maleBars">
+              {ratios[1] > 0.05 ? (
+                <Text margin={{ right: "5px" }} size="large">
+                  &nbsp;{`${Math.round(ratios[1])}%`}
+                </Text>
+              ) : null}
             </Box>
           </Box>
         </Box>

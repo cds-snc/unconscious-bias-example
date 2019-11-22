@@ -18,8 +18,8 @@ const theme = {
   global: {
     colors: {
       brand: "#228BE6",
-      maleBars: "#5c97bf",
-      femaleBars: "#d24d57"
+      maleBars: "#bbbd20", //"#e0e256",
+      femaleBars: "#287aff"
     },
 
     font: {
@@ -118,8 +118,8 @@ const App = () => {
             <ul>
               <li>
                 <Trans>
-                  Each employee has an <strong>Attrition</strong> chance of
-                  quitting each year.
+                  Each employee has a {attritionRate}% chance of quitting each
+                  year.
                 </Trans>
               </li>
               <li>
@@ -136,14 +136,13 @@ const App = () => {
               </li>
               <li>
                 <Trans>
-                  The scores for females are randomly selected from the range
-                  [0, 100]
+                  Female scores are randomly selected from the range [0, 100]
                 </Trans>
               </li>
               <li>
                 <Trans>
-                  The scores for males are randomly selected from the range [
-                  <strong>Bias</strong>, 100 + <strong>Bias</strong>]
+                  Male scores are randomly selected from the range [{bias},{" "}
+                  {100 + bias}]
                 </Trans>
               </li>
             </ul>
