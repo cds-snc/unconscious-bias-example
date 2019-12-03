@@ -35,7 +35,7 @@ const App = () => {
   const numLevels = 7;
   const employeesPerLevel = [4000, 1000, 200, 40, 10, 4, 1];
   const [levels, setLevels] = useState([]);
-  const [bias, setBias] = useState(5);
+  const [bias, setBias] = useState(1);
   const [attritionRate, setAttritionRate] = useState(15);
   const [time, setTime] = useState(0);
   const [isSimulationRunning, setIsSimulationRunning] = useState(false);
