@@ -19,8 +19,8 @@ const theme = {
     borderSize: "0px",
     colors: {
       brand: "#000000",
-      maleBars: "#bbbd20", //"#e0e256",
-      femaleBars: "#287aff"
+      maleBars: "#DFE256",
+      femaleBars: "#33B08E"
     },
     font: {
       family: "Roboto",
