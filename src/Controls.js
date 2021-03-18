@@ -9,6 +9,8 @@ const Controls = props => {
     doReset,
     bias,
     setBias,
+    simulationSpeed,
+    setSimulationSpeed,
     // attritionRate,
     // setAttritionRate,
     isSimulationRunning,
@@ -27,6 +29,7 @@ const Controls = props => {
               textAlign="center"
             >
               <Trans>Bias</Trans>: {bias}% &nbsp; &nbsp;
+              <Trans>Speed</Trans>: {simulationSpeed}
               {/* <Trans>Attrition</Trans>: {attritionRate}% */}
             </Heading>
           </Box>
@@ -41,6 +44,16 @@ const Controls = props => {
             />
           </FormField>
 
+          <FormField label={i18n._("Speed")}>
+            <RangeInput
+              label="Speed"
+              min={0}
+              max={100}
+              value={simulationSpeed}
+              onChange={event => setSimulationSpeed(parseInt(event.target.value))}
+            />
+          </FormField>
+          
           {/* <FormField label={i18n._("Attrition")}>
             <RangeInput
               label="AttritionRate"
@@ -73,6 +86,8 @@ Controls.prototype = {
   doReset: PropTypes.func.isRequired,
   bias: PropTypes.number.isRequired,
   setBias: PropTypes.func.isRequired,
+  simulationSpeed: PropTypes.func.isRequired,
+  setSimulationSpeed: PropTypes.func.isRequired,
   attritionRate: PropTypes.number.isRequired,
   setAttritionRate: PropTypes.func.isRequired,
   isSimulationRunning: PropTypes.bool.isRequired,

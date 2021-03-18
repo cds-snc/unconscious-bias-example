@@ -39,9 +39,11 @@ const App = () => {
   const [attritionRate, setAttritionRate] = useState(15);
   const [time, setTime] = useState(0);
   const [isSimulationRunning, setIsSimulationRunning] = useState(false);
+  const [simulationSpeed, setSimulationSpeed] = useState(50);
 
   const reset = () => {
     setIsSimulationRunning(false);
+    setSimulationSpeed(50);
     let newLevels = [];
     for (let levelIndex = 0; levelIndex < numLevels; levelIndex++) {
       let newLevel = [...Array(employeesPerLevel[levelIndex]).keys()].map(
@@ -59,7 +61,9 @@ const App = () => {
   const stepSimulation = () => {
     if (isSimulationRunning) {
       setTime(time + 1);
-      setLevels(stepAllLevels(levels, attritionRate, bias));
+      if (time % Math.round(100 / simulationSpeed) === 0) {
+        setLevels(stepAllLevels(levels, attritionRate, bias));
+      }
     }
   };
 
@@ -70,7 +74,7 @@ const App = () => {
 
   useInterval(() => {
     stepSimulation();
-  }, 500);
+  }, 250);
 
   const countArray = levels.map(level => countGenders(level));
   return (
@@ -95,6 +99,8 @@ const App = () => {
                 doReset={reset}
                 bias={bias}
                 setBias={setBias}
+                simulationSpeed={simulationSpeed}
+                setSimulationSpeed={setSimulationSpeed}
                 attritionRate={attritionRate}
                 setAttritionRate={setAttritionRate}
                 isSimulationRunning={isSimulationRunning}

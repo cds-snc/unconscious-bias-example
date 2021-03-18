@@ -8,6 +8,7 @@
   "Male": "Homme",
   "Male scores are randomly selected from the range [{bias}, {0}]": "Les scores des hommes sont choisis au hasard dans l'intervalle [{bias}, {0}].",
   "Reset": "Réinitialiser",
+  "Speed": "Vitesse",
   "Start": "Départ",
   "Stop": "Halte",
   "The Employees column gives the number of people at each level of the organization (so at the top is the CEO).": "La colonne Employés donne le nombre de personnes à chaque niveau de l'organisation (donc au sommet se trouve le PDG).",
